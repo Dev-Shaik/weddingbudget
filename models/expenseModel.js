@@ -7,6 +7,7 @@ const expenseSchema = new Schema(
     paidBy: String,
     paymentMethod: String,
     category: String,
+    mode: String,
   },
   {
     timeStmaps: true,

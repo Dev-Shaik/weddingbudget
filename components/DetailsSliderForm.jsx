@@ -10,6 +10,7 @@ export default function DetailsSlider({ expense, setOpenDetailsDialog }) {
   const [paidBy, setPaidBy] = useState();
   const [paymentMethod, setPaymentMethod] = useState();
   const [category, setCategory] = useState();
+  const [mode, setMode] = useState();
 
   useEffect(() => {
     setDescription(expense.description);
@@ -17,6 +18,9 @@ export default function DetailsSlider({ expense, setOpenDetailsDialog }) {
     setPaidBy(expense.paidBy);
     setPaymentMethod(expense.paymentMethod);
     setCategory(expense.category);
+    setMode(expense.mode);
+
+    console.log(expense.mode);
   }, []);
 
   const handleSubmit = () => {
@@ -27,7 +31,7 @@ export default function DetailsSlider({ expense, setOpenDetailsDialog }) {
     <div>
       <form onSubmit={handleSubmit} action={updateExpense}>
         <div className="space-y-4">
-          <input type="text" name="id" value={expense._id} hidden />
+          <input type="text" name="id" defaultValue={expense._id} hidden />
           <input
             required
             name="description"
@@ -49,44 +53,67 @@ export default function DetailsSlider({ expense, setOpenDetailsDialog }) {
           <select
             required
             name="paidBy"
-            defaultValue="habeeb"
+            defaultValue="Habeeb"
             value={paidBy}
             className="w-full bg-[#14004E15] p-3 rounded-md text-blue-900"
             onChange={(e) => setPaidBy(e.target.value)}
           >
-            <option value="habeeb">Habeeb</option>
-            <option value="javeed">Javeed</option>
-            <option value="zakeer">Zakeer</option>
-            <option value="abba">Abba</option>
-            <option value="anees">Anees</option>
-            <option value="others">Others</option>
+            <option value="Habeeb">Habeeb</option>
+            <option value="Javeed">Javeed</option>
+            <option value="Zakeer">Zakeer</option>
+            <option value="Abba">Abba</option>
+            <option value="Anees">Anees</option>
+            <option value="Others">Others</option>
           </select>
 
           <select
             required
             name="paymentMethod"
-            defaultValue="phonePay"
+            defaultValue="PhonePay"
             value={paymentMethod}
             className="w-full bg-[#14004E15] p-3 rounded-md text-blue-900"
             onChange={(e) => setPaymentMethod(e.target.value)}
           >
-            <option value="phonePay">PhonePay</option>
-            <option value="cash">Cash</option>
+            <option value="PhonePay">PhonePay</option>
+            <option value="Cash">Cash</option>
           </select>
 
           <select
             required
             name="category"
-            defaultValue="clothes"
+            defaultValue="Clothes"
             value={category}
             className="w-full bg-[#14004E15] p-3 rounded-md text-blue-900"
             onChange={(e) => setCategory(e.target.value)}
           >
-            <option value="clothes">Clothes</option>
-            <option value="food">Food</option>
-            <option value="transport">Transport</option>
-            <option value="others">Others</option>
+            <option value="Clothes">Clothes</option>
+            <option value="Food">Food</option>
+            <option value="Transport">Transport</option>
+            <option value="Others">Others</option>
           </select>
+
+          <input type="hidden" defaultValue={mode} name="mode" />
+
+          <div className="flex gap-2 px-1 w-full bg-[#14004E15] p-1 rounded-md text-blue-900">
+            <div
+              className={`w-1/2 flex justify-center ${
+                mode == "Payment" ? "bg-green-400 text-white" : " text-blue-800"
+              } p-2 rounded-md text-white`}
+              onClick={() => setMode("Payment")}
+            >
+              Payment
+            </div>
+            <div
+              className={`w-1/2 flex justify-center ${
+                mode == "Allocation"
+                  ? "bg-orange-300 text-white"
+                  : "text-blue-800"
+              } p-2 rounded-md text-white`}
+              onClick={() => setMode("Allocation")}
+            >
+              Allocation
+            </div>
+          </div>
         </div>
         <SubmitButton buttonText="Update Expense" />
       </form>

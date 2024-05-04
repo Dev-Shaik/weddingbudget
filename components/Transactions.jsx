@@ -8,6 +8,7 @@ export default function Transactions({ expenses }) {
   const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
   const [expense, setExpense] = useState();
   const [nameFilter, setNameFilter] = useState("All");
+  const [filteredExpenses, setFilteredExpenses] = useState(expenses);
 
   const handleClick = (expense) => {
     setOpenDetailsDialog(true);
@@ -15,6 +16,17 @@ export default function Transactions({ expenses }) {
   };
 
   const setFilter = (name) => {
+    console.log("Filtering name:", name);
+    if (name != "All") {
+      setFilteredExpenses(
+        expenses.filter((expense) => {
+          return expense.paidBy == name;
+        })
+      );
+    } else {
+      setFilteredExpenses(expenses);
+    }
+
     setNameFilter(name);
   };
 
@@ -75,11 +87,20 @@ export default function Transactions({ expenses }) {
           >
             Anees
           </p>
+
+          <p
+            className={
+              nameFilter == "Others" ? "activeNameFilter" : "inactiveNameFilter"
+            }
+            onClick={() => setFilter("Others")}
+          >
+            Anees
+          </p>
         </div>
       </div>
 
       <div>
-        {expenses.map((expense) => (
+        {filteredExpenses.map((expense) => (
           <div
             key={expense._id}
             onClick={() => handleClick(expense)}
@@ -96,8 +117,9 @@ export default function Transactions({ expenses }) {
                 <p>{Intl.NumberFormat("en-IN").format(expense.amount)}</p>
               </div>
               <div>
-                <div className="flex gap-2 text-sm text-gray-500 font-light">
+                <div className="flex gap-2 text-sm text-gray-500 font-light items-center">
                   <p>{expense.paidBy}</p>
+                  <div className="w-1 h-1 rounded-full bg-gray-400"></div>
                   <p>{expense.paymentMethod}</p>
                 </div>
               </div>

@@ -12,7 +12,7 @@ export default async function Home() {
   return (
     <main className="flex flex-col gap-5 max-w-[400px] m-auto py-8 bg-gray-100 min-h-svh">
       <Header />
-      <Dashboard />
+      <Dashboard expenses={JSON.parse(JSON.stringify(expenses))} />
       <Transactions expenses={JSON.parse(JSON.stringify(expenses))} />
       <InputSlider />
     </main>

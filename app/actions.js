@@ -11,6 +11,7 @@ export const createExpense = async (formData) => {
   const paidBy = formData.get("paidBy");
   const paymentMethod = formData.get("paymentMethod");
   const category = formData.get("category");
+  const mode = formData.get("mode");
 
   const newExpense = {
     description: description,
@@ -18,13 +19,14 @@ export const createExpense = async (formData) => {
     paidBy: paidBy,
     paymentMethod: paymentMethod,
     category: category,
+    mode: mode,
   };
 
   try {
     await connectToMongoDB();
     const response = await Expense.create(newExpense);
     if (response) {
-      console.log("Expense added successfully!");
+      console.log("Expense added successfully!", mode);
     }
   } catch (error) {
     console.log("Failed to add expense details!");
@@ -41,6 +43,7 @@ export const updateExpense = async (formData) => {
   const paidBy = formData.get("paidBy");
   const paymentMethod = formData.get("paymentMethod");
   const category = formData.get("category");
+  const mode = formData.get("mode");
 
   const newExpense = {
     description: description,
@@ -48,6 +51,7 @@ export const updateExpense = async (formData) => {
     paidBy: paidBy,
     paymentMethod: paymentMethod,
     category: category,
+    mode: mode,
   };
 
   try {
