@@ -1,4 +1,5 @@
 import mongoose, { Schema } from "mongoose";
+import { type } from "os";
 
 const expenseSchema = new Schema(
   {
@@ -8,9 +9,13 @@ const expenseSchema = new Schema(
     paymentMethod: String,
     category: String,
     mode: String,
+    createdDate: {
+      type: Date,
+      default: Date(),
+    },
   },
   {
-    timeStmaps: true,
+    timestamps: true,
   }
 );
 

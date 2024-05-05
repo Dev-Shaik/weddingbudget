@@ -26,10 +26,10 @@ export const createExpense = async (formData) => {
     await connectToMongoDB();
     const response = await Expense.create(newExpense);
     if (response) {
-      console.log("Expense added successfully!", mode);
+      console.log("Expense added successfully!");
     }
   } catch (error) {
-    console.log("Failed to add expense details!");
+    console.log("Failed to add expense details!", error);
   }
 
   revalidatePath("/");
