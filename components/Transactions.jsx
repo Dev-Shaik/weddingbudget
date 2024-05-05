@@ -111,60 +111,69 @@ export default function Transactions({ expenses }) {
       </div>
 
       <div>
-        {filteredExpenses.map((expense) => (
-          <div
-            key={expense._id}
-            onClick={() => handleClick(expense)}
-            className="flex justify-between items-center gap-3 w-full py-3 border-b-[1px] border-gray-300"
-          >
+        {filteredExpenses.length > 0 ? (
+          filteredExpenses?.map((expense) => (
             <div
-              className={`flex justify-center items-center w-[40px] h-[35px] rounded-full ${
-                expense.paidBy == "Habeeb"
-                  ? "bg-[#0CA8ED]"
-                  : expense.paidBy == "Javeed"
-                  ? "bg-[#B0D16F]"
-                  : expense.paidBy == "Zakeer"
-                  ? "bg-[#45C5FF]"
-                  : expense.paidBy == "Abba"
-                  ? "bg-[#FFB54C]"
-                  : expense.paidBy == "Anees"
-                  ? "bg-[#F71E78]"
-                  : "bg-[#FFE278]"
-              }`}
+              key={expense._id}
+              onClick={() => handleClick(expense)}
+              className="flex justify-between items-center gap-3 w-full py-3 border-b-[1px] border-gray-300"
             >
-              <p className="text-white">
-                {expense.paidBy.slice(0, 1).toUpperCase()}
-              </p>
-            </div>
-            <div className="w-full flex flex-col">
-              {/* First row */}
-              <div className="flex justify-between">
-                <p>{expense.description}</p>
-                <p>{Intl.NumberFormat("en-IN").format(expense.amount)}</p>
+              <div
+                className={`flex justify-center items-center w-[40px] h-[35px] rounded-full ${
+                  expense.paidBy == "Habeeb"
+                    ? "bg-[#0CA8ED]"
+                    : expense.paidBy == "Javeed"
+                    ? "bg-[#B0D16F]"
+                    : expense.paidBy == "Zakeer"
+                    ? "bg-[#45C5FF]"
+                    : expense.paidBy == "Abba"
+                    ? "bg-[#FFB54C]"
+                    : expense.paidBy == "Anees"
+                    ? "bg-[#F71E78]"
+                    : "bg-[#FFE278]"
+                }`}
+              >
+                <p className="text-white">
+                  {expense.paidBy.slice(0, 1).toUpperCase()}
+                </p>
               </div>
-              {/* Second row */}
-              <div className="flex justify-between">
-                <div className="flex gap-2 text-sm text-gray-500 font-light items-center">
-                  {/* <p>{expense.createdAt?.slice(0, 10)}</p> */}
-                  <p>{dateFormatter(expense.createdAt)}</p>
-                  <div className="w-1 h-1 rounded-full bg-gray-400"></div>
-                  <p>{expense.paymentMethod}</p>
+              <div className="w-full flex flex-col">
+                {/* First row */}
+                <div className="flex justify-between">
+                  <p>{expense.description}</p>
+                  <p>{Intl.NumberFormat("en-IN").format(expense.amount)}</p>
                 </div>
-                <div>
-                  <p
-                    className={`text-sm ${
-                      expense.mode == "Payment"
-                        ? "text-green-800"
-                        : "text-orange-800"
-                    } font-light`}
-                  >
-                    {expense.mode}
-                  </p>
+                {/* Second row */}
+                <div className="flex justify-between">
+                  <div className="flex gap-2 text-sm text-gray-500 font-light items-center">
+                    {/* <p>{expense.createdAt?.slice(0, 10)}</p> */}
+                    <p>{dateFormatter(expense.createdAt)}</p>
+                    <div className="w-1 h-1 rounded-full bg-gray-400"></div>
+                    <p>{expense.paymentMethod}</p>
+                  </div>
+                  <div>
+                    <p
+                      className={`text-sm ${
+                        expense.mode == "Payment"
+                          ? "text-green-800"
+                          : "text-orange-800"
+                      } font-light`}
+                    >
+                      {expense.mode}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
+          ))
+        ) : (
+          <div className="w-full h-32 flex flex-col justify-center items-center">
+            <p className="text-gray-800 font-bold">No expenses found</p>
+            <p className="text-sm font-light text-gray-400 text-center px-8 py-2">
+              Add expenses by clicking on '+' button on the bottom
+            </p>
           </div>
-        ))}
+        )}
       </div>
 
       <DetailsSlider
