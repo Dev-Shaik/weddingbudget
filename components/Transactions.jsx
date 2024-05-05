@@ -170,7 +170,7 @@ export default function Transactions({ expenses }) {
           <div className="w-full h-32 flex flex-col justify-center items-center">
             <p className="text-gray-800 font-bold">No expenses found</p>
             <p className="text-sm font-light text-gray-400 text-center px-8 py-2">
-              Add expenses by clicking on '+' button on the bottom
+              Add expenses by clicking on + button on the bottom
             </p>
           </div>
         )}
