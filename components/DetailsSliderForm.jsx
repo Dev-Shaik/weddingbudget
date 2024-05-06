@@ -19,8 +19,6 @@ export default function DetailsSlider({ expense, setOpenDetailsDialog }) {
     setPaymentMethod(expense.paymentMethod);
     setCategory(expense.category);
     setMode(expense.mode);
-
-    console.log(expense.mode);
   }, []);
 
   const handleSubmit = () => {
@@ -88,6 +86,9 @@ export default function DetailsSlider({ expense, setOpenDetailsDialog }) {
           >
             <option value="Clothes">Clothes</option>
             <option value="Food">Food</option>
+            <option value="Transport">Function Hall</option>
+            <option value="Transport">Home Decoration</option>
+            <option value="Transport">Shopping</option>
             <option value="Transport">Transport</option>
             <option value="Others">Others</option>
           </select>

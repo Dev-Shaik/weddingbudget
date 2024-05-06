@@ -59,6 +59,9 @@ export default function NewExpenseForm({ setOpenAddDialog }) {
           >
             <option value="Clothes">Clothes</option>
             <option value="Food">Food</option>
+            <option value="Transport">Function Hall</option>
+            <option value="Transport">Home Decoration</option>
+            <option value="Transport">Shopping</option>
             <option value="Transport">Transport</option>
             <option value="Others">Others</option>
           </select>

@@ -21,8 +21,15 @@ export default function Transactions({ expenses }) {
     return r;
   };
 
+  const truncateString = (str, num) => {
+    if (str.length > num) {
+      return str.slice(0, num) + "...";
+    } else {
+      return str;
+    }
+  };
+
   const setFilter = (name) => {
-    console.log("Filtering name:", name);
     if (name != "All") {
       setFilteredExpenses(
         expenses.filter((expense) => {
@@ -33,6 +40,7 @@ export default function Transactions({ expenses }) {
       setFilteredExpenses(expenses);
     }
 
+    filteredExpenses.reverse();
     setNameFilter(name);
   };
 
@@ -110,7 +118,7 @@ export default function Transactions({ expenses }) {
         </div>
       </div>
 
-      <div>
+      <div className="flex flex-col-reverse">
         {filteredExpenses.length > 0 ? (
           filteredExpenses?.map((expense) => (
             <div
@@ -140,7 +148,7 @@ export default function Transactions({ expenses }) {
               <div className="w-full flex flex-col">
                 {/* First row */}
                 <div className="flex justify-between">
-                  <p>{expense.description}</p>
+                  <p>{truncateString(expense.description, 18)}</p>
                   <p>{Intl.NumberFormat("en-IN").format(expense.amount)}</p>
                 </div>
                 {/* Second row */}

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 export default function Dashboard({ expenses }) {
   const [allocated, setAllocated] = useState(0);
+  const [paidExpenses, setPaidExpenses] = useState([]);
   const [paid, setPaid] = useState(0);
   const [due, setDue] = useState(0);
 
@@ -11,9 +12,11 @@ export default function Dashboard({ expenses }) {
     setAllocated(
       expenses.reduce((sum, expense) => sum + parseInt(expense.amount), 0)
     );
-    let paidExpenses = expenses.filter((expense) => {
-      return expense.mode == "Payment";
-    });
+    setPaidExpenses(
+      expenses.filter((expense) => {
+        return expense.mode == "Payment";
+      })
+    );
     setPaid(
       paidExpenses.reduce((sum, expense) => sum + parseInt(expense.amount), 0)
     );
@@ -32,7 +35,7 @@ export default function Dashboard({ expenses }) {
         </p>
       </div>
       <div className="w-full bg-[#33FF0020] rounded-sm p-4 ">
-        <p className="text-sm text-[#026D00]">Payments Done</p>
+        <p className="text-sm text-[#026D00]">Payments Done </p>
         <p className="text-xl text-[#014200] font-bold">
           ₹ {Intl.NumberFormat("en-IN").format(paid)}
         </p>
